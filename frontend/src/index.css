@@ -37,7 +37,6 @@ img {
   max-width: 100%;
 }
 
-   NAVBAR
 .nav {
   background: var(--green);
   box-shadow: 0 2px 8px rgba(0,0,0,.15);
@@ -213,23 +212,21 @@ main {
 }
 
 .sobre__section {
-  display: flex;
   align-items: center;
+  display: flex;
   justify-content: space-between;
-  gap: 80px;         
+  gap: 80px;
   margin-bottom: 70px;
-  flex-direction: row; 
 }
 
-
 .sobre__section.reverse {
-  flex-direction: row; 
+  flex-direction: row-reverse;
 }
 
 .sobre__text {
   flex: 1;
   font-size: 16px;
-  line-height: 1.9;   
+  line-height: 1.9;
 }
 
 .sobre__text h3 {
@@ -244,13 +241,13 @@ main {
 }
 
 .sobre__img {
-  flex: 1;
-  width: 100%;
-  max-width: 330px;   
   aspect-ratio: 4 / 3;
+  border-radius: 12px;
+  flex: 1;
+  max-width: 330px;
   object-fit: cover;
   object-position: center;
-  border-radius: 12px;
+  width: 100%;
 }
 
 .sobre__divider {
@@ -261,8 +258,8 @@ main {
 
 .sobre__metrics {
   display: flex;
+  gap: 120px;
   justify-content: center;
-  gap: 120px;         
   margin: 70px 0 20px;
   text-align: center;
 }
@@ -388,8 +385,9 @@ main {
 
   .sobre { margin: 40px auto; padding: 0 16px; }
 
-  .sobre__section {
-    flex-direction: column; 
+  .sobre__section,
+  .sobre__section.reverse {
+    flex-direction: column;
     gap: 24px;
     text-align: center;
   }
