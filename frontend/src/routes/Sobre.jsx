@@ -6,7 +6,7 @@ const Sobre = () => {
       {/* Título */}
       <h2 className="sobre__title">Sobre Nós</h2>
 
-      {/* 1) Nossa Missão → TEXTO à esquerda, IMAGEM à direita */}
+      {/* TEXTO à esquerda, IMAGEM à direita */}
       <section className="sobre__section">
         <div className="sobre__text">
           <h3>Nossa Missão</h3>
@@ -28,7 +28,7 @@ const Sobre = () => {
 
       <hr className="sobre__divider" />
 
-      {/* 2) Segurança → IMAGEM à esquerda, TEXTO à direita */}
+      {/* IMAGEM à esquerda, TEXTO à direita */}
       <section className="sobre__section">
         <img
           className="sobre__img"
