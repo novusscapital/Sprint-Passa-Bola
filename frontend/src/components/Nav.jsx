@@ -1,34 +1,26 @@
-import { Link } from 'react-router-dom'
-import logo from '../assets/pageicon.png'
+import { NavLink, Link } from "react-router-dom";
+import logo from "../assets/logo.png";
 
-const Nav = () => {
+const linkClass = ({ isActive }) =>
+  "nav__a" + (isActive ? " nav__a--active" : "");
+
+export default function Nav() {
   return (
-    <header>
-      <img src={logo} alt='logo'/>
+    <>
+      <Link to="/" className="nav__brand" translate="no">
+        <img src={logo} alt="Elas em Campo" className="nav__logo" />
+      </Link>
+
       <nav>
-        <ul>
-          <li>
-            <Link to='/'>Home</Link>
-          </li>
-          <li>
-            <Link to='/Sobre'>Sobre</Link>
-          </li>
-          <li>
-            <Link to='/Campeonato'>Campeonato</Link>
-          </li>
-          <li>
-            <Link to='/Noticias'>Notícias</Link>
-          </li>
-          <li>
-            <Link to='/Peneiras'>Peneiras</Link>
-          </li>
-          <li>
-            <Link to='/Login'>Login</Link>
-          </li>
+        <ul className="nav__links" translate="no">
+          <li><NavLink to="/" className={linkClass}>Home</NavLink></li>
+          <li><NavLink to="/Sobre" className={linkClass}>Sobre</NavLink></li>
+          <li><NavLink to="/Campeonato" className={linkClass}>Campeonato</NavLink></li>
+          <li><NavLink to="/Noticias" className={linkClass}>Notícias</NavLink></li>
+          <li><NavLink to="/Peneiras" className={linkClass}>Peneiras</NavLink></li>
+          <li><NavLink to="/Login" className={linkClass}>Conecte-se</NavLink></li>
         </ul>
       </nav>
-    </header>
-  )
+    </>
+  );
 }
-
-export default Nav
