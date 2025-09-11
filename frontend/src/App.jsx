@@ -6,8 +6,8 @@ import Campeonato from "./routes/Campeonato";
 import Noticias from "./routes/Noticias";
 import Peneiras from "./routes/Peneiras";
 import Login from "./routes/Login";
+import Cadastro from "./routes/Cadastro";
 import Error from "./routes/Error";
-
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 
@@ -28,6 +28,7 @@ export default function App() {
           <Route path="/Noticias" element={<Noticias />} />
           <Route path="/Peneiras" element={<Peneiras />} />
           <Route path="/Login" element={<Login />} />
+          <Route path="/Cadastro" element={<Cadastro />} />
           <Route path="*" element={<Error />} />
         </Routes>
       </main>
