@@ -10,7 +10,24 @@ app.use(cors());
 app.use(express.json());
 
 const users = [
-    { id: 1, email: 'teste@teste.com', password: '123' },
+    { 
+        id: 1, 
+        email: 'teste123@gmail.com', 
+        password: '1234',
+        role: 'user'
+    },
+    { 
+        id: 2, 
+        email: 'teste1234@gmail.com', 
+        password: '1234@',
+        role: 'user'
+    },
+    { 
+        id: 3, 
+        email: 'teste1235@gmail.com', 
+        password: '1234@A',
+        role: 'admin'
+    },
 ];
 
 app.post('/api/login', async (req, res) => {
@@ -28,11 +45,24 @@ app.post('/api/login', async (req, res) => {
         return res.status(401).json({ message: 'Email ou senha inválidos.' });
     }
 
-    const token = jwt.sign({ id: user.id }, 'secreto_do_login', { expiresIn: '1h' });
+    const token = jwt.sign(
+        { 
+            id: user.id,
+            role: user.role
+        }, 
+        'secreto_do_login', 
+        { expiresIn: '1h' }
+    );
 
-    res.status(200).json({ message: 'Login bem-sucedido!', token });
+    res.status(200).json({ 
+        message: 'Login bem-sucedido!', 
+        token,
+        role: user.role
+    });
 });
 
 app.listen(port, () => {
     console.log(`Servidor rodando em http://localhost:${port}`);
 });
+
+module.exports = app;

@@ -21,9 +21,17 @@ const Login = () => {
       });
 
       if (response.ok) {
+        const data = await response.json();
         console.log('Login bem-sucedido!');
+        
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('role', data.role);
 
-        navigate('/');
+        if (data.role === 'admin') {
+          navigate('/admin');
+        } else {
+          navigate('/');
+        }
       } else {
         const errorData = await response.json();
         setError(errorData.message || 'Erro desconhecido.');

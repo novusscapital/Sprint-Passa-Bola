@@ -8,8 +8,20 @@ import Peneiras from "./routes/Peneiras";
 import Login from "./routes/Login";
 import Cadastro from "./routes/Cadastro";
 import Error from "./routes/Error";
+import Admin from './components/Admin';
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
+
+const ProtectedRoute = ({ children }) => {
+  const token = localStorage.getItem('token');
+  const role = localStorage.getItem('role');
+
+  if (!token || role !== 'admin') {
+    return <Navigate to="/login" replace />;
+  }
+
+  return children;
+};
 
 export default function App() {
   return (
@@ -29,6 +41,7 @@ export default function App() {
           <Route path="/Peneiras" element={<Peneiras />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/Cadastro" element={<Cadastro />} />
+          <Route path="/Admin" element={<Admin />} />
           <Route path="*" element={<Error />} />
         </Routes>
       </main>
