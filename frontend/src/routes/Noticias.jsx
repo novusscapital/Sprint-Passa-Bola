@@ -1,7 +1,79 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Noticias = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  
+  // Dados de exemplo para as notícias
+  const noticias = [
+    {
+      id: 1,
+      data: "15 de junho de 2024",
+      titulo: "Inscrições abertas para peneiras regionais",
+      conteudo: "Meninas de 14 a 20 anos podem se inscrever nas peneiras que acontecerão em 15 cidades brasileiras.",
+      imagem: "/src/assets/imagem_noticia1.png",
+      alt: "Grupo de meninas com bola"
+    },
+    {
+      id: 2,
+      data: "15 de junho de 2024",
+      titulo: "Parceria com escolas públicas é ampliada",
+      conteudo: "Programa de incentivo ao futebol feminino chega a mais de 50 escolas em todo o território nacional.",
+      imagem: "/src/assets/imagem_noticia2.png",
+      alt: "Treino com equipes em quadra"
+    },
+    {
+      id: 3,
+      data: "14 de junho de 2024",
+      titulo: "Seleção feminina sub-17 convocada para amistosos",
+      conteudo: "A técnica anunciou a lista de convocadas para a série de amistosos internacionais.",
+      imagem: "/src/assets/imagem_noticia1.png",
+      alt: "Meninas treinando"
+    },
+    {
+      id: 4,
+      data: "13 de junho de 2024",
+      titulo: "Novo centro de treinamento é inaugurado",
+      conteudo: "Com estrutura de ponta, o centro vai atender atletas de base e profissional.",
+      imagem: "/src/assets/imagem_noticia2.png",
+      alt: "Centro de treinamento"
+    },
+    {
+      id: 5,
+      data: "12 de junho de 2024",
+      titulo: "Atleta brasileira é destaque em competição internacional",
+      conteudo: "Jovem promessa do futebol feminino marca três gols em torneio na Europa.",
+      imagem: "/src/assets/imagem_noticia1.png",
+      alt: "Jogadora comemorando gol"
+    },
+    {
+      id: 6,
+      data: "11 de junho de 2024",
+      titulo: "Projeto social forma primeira turma de técnicas",
+      conteudo: "Iniciativa capacita ex-atletas para atuarem como técnicas em comunidades carentes.",
+      imagem: "/src/assets/imagem_noticia2.png",
+      alt: "Formatura de técnicas"
+    }
+  ];
+
+  // Calcular quantos grupos de notícias temos (cada grupo com 2 notícias)
+  const gruposNoticias = [];
+  for (let i = 0; i < noticias.length; i += 2) {
+    gruposNoticias.push(noticias.slice(i, i + 2));
+  }
+
+  const nextGroup = () => {
+    setCurrentIndex((prevIndex) => 
+      prevIndex === gruposNoticias.length - 1 ? 0 : prevIndex + 1
+    );
+  };
+
+  const prevGroup = () => {
+    setCurrentIndex((prevIndex) => 
+      prevIndex === 0 ? gruposNoticias.length - 1 : prevIndex - 1
+    );
+  };
+
   return (
     <main className="max-w-[1100px] mx-auto my-10 mb-14 px-[18px]">
       {/* Título da página */}
@@ -50,52 +122,78 @@ const Noticias = () => {
         </div>
       </section>
 
-      {/* BLOCO: Lista de notícias */}
-      <section className="mt-6">
+      {/* BLOCO: Lista de notícias com carrossel */}
+      <section className="mt-6 relative">
         <h3 className="text-[#1f5b37] text-[22px] mb-3.5 border-b-[3px] border-[#1f5b37] inline-block pb-1">
           Notícias
         </h3>
 
-        <div className="grid grid-cols-2 gap-6 mt-3.5">
-          {/* Card 1 */}
-          <article className="bg-white rounded-[14px] shadow-[0_10px_24px_rgba(0,0,0,0.08)] overflow-hidden border border-solid border-[rgba(0,0,0,0.06)]">
-            <img
-              className="w-full aspect-[16/9] object-cover"
-              src="/src/assets/imagem_noticia1.png"
-              alt="Grupo de meninas com bola"
-            />
+        <div className="relative">
+          {/* Botão de navegação esquerdo */}
+          <button 
+            onClick={prevGroup}
+            className="absolute left-[-30px] top-1/2 transform -translate-y-1/2 z-10 bg-white rounded-full p-2 shadow-md hover:bg-[#f1f5f9] transition-colors"
+            style={{ top: '50%' }}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-[#1f5b37]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
 
-            <div className="p-3.5 grid gap-2">
-              <p className="text-[#7a8a97] text-[13px] m-0">15 de junho de 2024</p>
-              <h4 className="m-0 text-[#0f2e21] text-[18px] leading-[1.3]">
-                Inscrições abertas para peneiras regionais
-              </h4>
-              <p className="m-0 text-[#374151] text-[14px] leading-[1.55]">
-                Meninas de 14 a 20 anos podem se inscrever nas peneiras que
-                acontecerão em 15 cidades brasileiras.
-              </p>
+          {/* Container do carrossel */}
+          <div className="overflow-hidden">
+            <div 
+              className="flex transition-transform duration-300 ease-in-out"
+              style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+            >
+              {gruposNoticias.map((grupo, grupoIndex) => (
+                <div key={grupoIndex} className="w-full flex-shrink-0 grid grid-cols-2 gap-6">
+                  {grupo.map((noticia) => (
+                    <article key={noticia.id} className="bg-white rounded-[14px] shadow-[0_10px_24px_rgba(0,0,0,0.08)] overflow-hidden border border-solid border-[rgba(0,0,0,0.06)]">
+                      <img
+                        className="w-full aspect-[16/9] object-cover"
+                        src={noticia.imagem}
+                        alt={noticia.alt}
+                      />
+
+                      <div className="p-3.5 grid gap-2">
+                        <p className="text-[#7a8a97] text-[13px] m-0">{noticia.data}</p>
+                        <h4 className="m-0 text-[#0f2e21] text-[18px] leading-[1.3]">
+                          {noticia.titulo}
+                        </h4>
+                        <p className="m-0 text-[#374151] text-[14px] leading-[1.55]">
+                          {noticia.conteudo}
+                        </p>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              ))}
             </div>
-          </article>
+          </div>
 
-          {/* Card 2 */}
-          <article className="bg-white rounded-[14px] shadow-[0_10px_24px_rgba(0,0,0,0.08)] overflow-hidden border border-solid border-[rgba(0,0,0,0.06)]">
-            <img
-              className="w-full aspect-[16/9] object-cover"
-              src="/src/assets/imagem_noticia2.png"
-              alt="Treino com equipes em quadra"
+          {/* Botão de navegação direito */}
+          <button 
+            onClick={nextGroup}
+            className="absolute right-[-30px] top-1/2 transform -translate-y-1/2 z-10 bg-white rounded-full p-2 shadow-md hover:bg-[#f1f5f9] transition-colors"
+            style={{ top: '50%' }}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-[#1f5b37]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
+
+        {/* Indicadores de página */}
+        <div className="flex justify-center mt-6 space-x-2">
+          {gruposNoticias.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentIndex(index)}
+              className={`w-3 h-3 rounded-full ${currentIndex === index ? 'bg-[#1f5b37]' : 'bg-[#cbd5e1]'}`}
+              aria-label={`Ir para o grupo ${index + 1}`}
             />
-
-            <div className="p-3.5 grid gap-2">
-              <p className="text-[#7a8a97] text-[13px] m-0">15 de junho de 2024</p>
-              <h4 className="m-0 text-[#0f2e21] text-[18px] leading-[1.3]">
-                Parceria com escolas públicas é ampliada
-              </h4>
-              <p className="m-0 text-[#374151] text-[14px] leading-[1.55]">
-                Programa de incentivo ao futebol feminino chega a mais de 50
-                escolas em todo o território nacional.
-              </p>
-            </div>
-          </article>
+          ))}
         </div>
 
         {/* Opt-in de e-mail */}

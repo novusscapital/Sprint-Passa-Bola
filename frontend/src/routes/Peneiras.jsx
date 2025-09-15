@@ -9,8 +9,8 @@ const Peneiras = () => {
       {/* Mapa / banner superior */}
       <div className="bg-[#fff7e9] rounded-[16px] border border-solid border-[rgba(0,0,0,0.08)] shadow-[0_8px_22px_rgba(0,0,0,0.06)] overflow-hidden">
         <img
-          className="w-full h-[260px] object-cover"
-          src="/src/assets/mapa.png"
+          className="w-full h-auto object-cover"
+          src="./src/assets/mapa.png"
           alt="Mapa com marcações"
         />
       </div>
