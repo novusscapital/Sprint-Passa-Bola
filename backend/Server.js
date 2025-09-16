@@ -12,20 +12,20 @@ app.use(express.json());
 const users = [
     { 
         id: 1, 
-        email: 'teste123@gmail.com', 
+        email: 'teste1@gmail.com', 
         password: '1234',
         role: 'user'
     },
     { 
         id: 2, 
-        email: 'teste1234@gmail.com', 
-        password: '1234@',
+        email: 'teste2@gmail.com', 
+        password: '111',
         role: 'user'
     },
     { 
         id: 3, 
-        email: 'teste1235@gmail.com', 
-        password: '1234@A',
+        email: 'admin@gmail.com', 
+        password: '111',
         role: 'admin'
     },
 ];
